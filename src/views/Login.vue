@@ -5,7 +5,6 @@
         <h1 class="text-center">Login</h1>
 
         <b-form class="mx-auto">
-
           <b-form-group label="Email"
             ><b-form-input
               v-model="form.email"
@@ -14,7 +13,6 @@
               required
             ></b-form-input
           ></b-form-group>
-
 
           <b-form-group label="Password"
             ><b-form-input
@@ -25,11 +23,11 @@
           ></b-form-group>
 
           <div class="text-center">
-            <b-button type="submit" variant="primary">Submit</b-button>
+            <b-button @click.prevent="onClick()" type="submit" variant="primary"
+              >Submit</b-button
+            >
           </div>
-
         </b-form>
-        
       </b-col>
     </b-row>
   </b-container>
@@ -49,18 +47,26 @@ form {
 
 
 <script>
+import { mapActions } from "vuex"
+
 export default {
   data() {
     return {
       form: {
         email: "",
-        password: ""
+        password: "",
       },
-    };
+    }
   },
 
   methods: {
-    
-  }
-};
+    async onClick() {
+      const result = await this.login(this.form)
+      if (result === true) {
+        this.$router.push("/")
+      }
+    },
+    ...mapActions(["login"]),
+  },
+}
 </script>

@@ -14,12 +14,19 @@
             <b-nav-item to="/aboutus/">About Us</b-nav-item>
             <b-nav-item to="/services/">Services</b-nav-item>
             <b-nav-item to="/contact/">Contact</b-nav-item>
-            <li class="nav-item">
+            <li class="nav-item" v-if="!token">
               <router-link
                 class="botonlogueo btn btn-primary btn-sm pointer"
                 to="/login/"
                 ><font-awesome-icon :icon="['fas', 'user']" />
                 Login</router-link
+              >
+            </li>
+            <li class="nav-item" v-if="token">
+              <a
+                @click="superLogout()"
+                class="botonlogueo btn btn-primary btn-sm pointer"
+                ><font-awesome-icon :icon="['fas', 'sign-out-alt']" /> Logout</a
               >
             </li>
           </b-navbar-nav>
@@ -51,3 +58,21 @@ header .nav-item {
   margin-right: 12px;
 }
 </style>
+
+
+<script>
+import { mapState } from "vuex"
+import { mapActions } from "vuex"
+
+export default {
+  computed: mapState(["token"]),
+  methods: {
+    superLogout() {
+      this.$router.push("/login/")
+      this.logout();
+    },
+
+    ...mapActions(["logout"]),
+  },
+};
+</script>

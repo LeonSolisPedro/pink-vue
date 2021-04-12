@@ -4,3 +4,4 @@
 import "./bootstrap-vue"
 import "./fontawesome"
 import "./firebase"
+import "./axios"
