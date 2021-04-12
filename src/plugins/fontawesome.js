@@ -5,11 +5,15 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome"
 import "@fortawesome/fontawesome-svg-core/styles.css"
 
 //Icons
-import { faBasketballBall, faShareAlt, faSignOutAlt, faUser } from "@fortawesome/free-solid-svg-icons"
+import {
+  faBasketballBall, faShareAlt, faSignOutAlt,
+  faUser, faTicketAlt, faCamera, faFont, faTabletAlt
+} from "@fortawesome/free-solid-svg-icons"
 import { faFacebook, faTwitter } from "@fortawesome/free-brands-svg-icons"
 
 
-library.add(faBasketballBall, faShareAlt, faSignOutAlt, faFacebook, faTwitter, faUser)
+library.add(faBasketballBall, faShareAlt, faSignOutAlt,
+  faFacebook, faTwitter, faUser, faTicketAlt, faCamera, faFont, faTabletAlt)
 
 
 config.autoAddCss = false
