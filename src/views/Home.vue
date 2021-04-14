@@ -144,7 +144,6 @@
 
 <script>
 import { mapState } from "vuex";
-import axios from "axios";
 
 export default {
   data() {
@@ -155,7 +154,7 @@ export default {
 
   async mounted() {
     if (this.token) {
-      const result = await axios("/api/posts");
+      const result = await this.axios.get("/api/posts");
       this.posts = result.data;
     }
   },

@@ -2,7 +2,6 @@ import Vue from "vue"
 import Vuex from "vuex"
 import vuexLocal from "../plugins/vuex-persist"
 import firebase from "firebase/app"
-import axios from "axios"
 import "firebase/auth"
 
 Vue.use(Vuex)
@@ -27,7 +26,7 @@ export default new Vuex.Store({
         commit("setUser", JSON.stringify(user))
         const token = await firebase.auth().currentUser.getIdToken()
         commit("setToken", token)
-        axios.defaults.headers.common = { "Authorization": `Bearer ${token}` }
+        Vue.axios.defaults.headers.common = { "Authorization": `Bearer ${token}` }
         alert(`Welcome ${user.user.email}`)
         return true
       } catch {
