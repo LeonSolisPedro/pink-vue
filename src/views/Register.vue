@@ -2,10 +2,10 @@
   <b-container>
     <b-row>
       <b-col>
-        <h1 class="text-center">Login</h1>
+        <h1 class="text-center">Register</h1>
 
         <b-form class="mx-auto">
-          <b-form-group label="Email"
+          <b-form-group label="Enter your Email Address"
             ><b-form-input
               v-model="form.email"
               type="email"
@@ -14,9 +14,17 @@
             ></b-form-input
           ></b-form-group>
 
-          <b-form-group label="Password"
+          <b-form-group label="Choose a Password"
             ><b-form-input
               v-model="form.password"
+              type="password"
+              required
+            ></b-form-input
+          ></b-form-group>
+
+          <b-form-group label="Confirm your Password"
+            ><b-form-input
+              v-model="form.passwordconfirm"
               type="password"
               required
             ></b-form-input
@@ -29,14 +37,16 @@
           </div>
 
           <small class="d-block mt-4"
-            >Don't have an account?
-            <router-link to="/register/">Register Here</router-link></small
+            >You have an existing account?
+            <router-link to="/login/">Login Here</router-link></small
           >
+
         </b-form>
       </b-col>
     </b-row>
   </b-container>
 </template>
+
 
 
 <style scoped>
@@ -52,26 +62,22 @@ form {
 
 
 <script>
-import { mapActions } from "vuex"
-
 export default {
   data() {
     return {
       form: {
         email: "",
         password: "",
-      },
+        passwordconfirm: ""
+      }
     }
   },
 
+
   methods: {
-    async onClick() {
-      const result = await this.login(this.form)
-      if (result === true) {
-        this.$router.push("/")
-      }
-    },
-    ...mapActions(["login"]),
-  },
+    onClick() {
+      alert("I will be register you")
+    }
+  }
 }
 </script>

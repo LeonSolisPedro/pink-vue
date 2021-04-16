@@ -69,10 +69,10 @@ export default {
   methods: {
     superLogout() {
       this.$router.push("/login/")
-      this.logout();
+      this.logout()
     },
 
     ...mapActions(["logout"]),
   },
-};
+}
 </script>

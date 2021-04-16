@@ -2,7 +2,7 @@ import Vue from "vue"
 
 import {
   LayoutPlugin, NavbarPlugin, CollapsePlugin, ButtonPlugin, FormPlugin,
-  FormGroupPlugin, FormInputPlugin, ImagePlugin, CarouselPlugin
+  FormGroupPlugin, FormInputPlugin, ImagePlugin
 } from "bootstrap-vue"
 import "bootstrap/dist/css/bootstrap.css"
 import "bootstrap-vue/dist/bootstrap-vue.css"
@@ -15,4 +15,3 @@ Vue.use(FormPlugin)
 Vue.use(FormGroupPlugin)
 Vue.use(FormInputPlugin)
 Vue.use(ImagePlugin)
-Vue.use(CarouselPlugin)

@@ -4,6 +4,8 @@ module.exports = {
   },
   productionSourceMap: false,
   chainWebpack: config => {
+    // remove the prefetch plugin
+    config.plugins.delete('prefetch')
     config.module
       .rule("vue")
       .use("vue-loader")

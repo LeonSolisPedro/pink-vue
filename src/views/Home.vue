@@ -3,7 +3,7 @@
     <b-carousel id="carousel-1" :interval="4000" controls indicators>
       <!-- Slides with custom text -->
       <b-carousel-slide
-        img-src="https://i.picsum.photos/id/916/800/500.jpg?hmac=HVwLizUhaSHgHo3Luhyzn_0NXALse70ODKu6nrQ-f2k"
+        img-src="../assets/one.jpg"
         alt="Carousel One"
       >
         <h1>Welcome to Pink</h1>
@@ -12,7 +12,7 @@
 
       <!-- Slides with custom text -->
       <b-carousel-slide
-        img-src="https://i.picsum.photos/id/454/800/500.jpg?hmac=LY5FeTzYusZvwD9er3uDQuY6GJI_ih2RAP98K0ucP-o"
+        img-src="../assets/two.jpg"
         alt="Carousel One"
       >
         <h1>Introducing pink</h1>
@@ -21,7 +21,7 @@
 
       <!-- Slides with custom text -->
       <b-carousel-slide
-        img-src="https://i.picsum.photos/id/570/800/500.jpg?hmac=l6Z8qimqlwjxMa73A012dykCd0XOOqM1fdlpHRx07_U"
+        img-src="../assets/three.jpg"
         alt="Carousel One"
       >
         <h1>Wofff</h1>
@@ -39,7 +39,7 @@
             lectus mattis, molestie eros sed
           </p>
           <p v-if="!token">
-            Please, <router-link to="login">login first</router-link> to get started
+            Please, <router-link to="/login/">login first</router-link> to get started
           </p>
         </b-col>
       </b-row>
@@ -143,22 +143,28 @@
 </style>
 
 <script>
-import { mapState } from "vuex";
+import { mapState } from "vuex"
+import { BCarousel, BCarouselSlide } from "bootstrap-vue"
 
 export default {
   data() {
     return {
       posts: null,
-    };
+    }
   },
 
   async mounted() {
     if (this.token) {
-      const result = await this.axios.get("/api/posts");
-      this.posts = result.data;
+      const result = await this.axios.get("/api/posts")
+      this.posts = result.data
     }
   },
 
   computed: mapState(["token"]),
-};
+
+  components: {
+    BCarousel,
+    BCarouselSlide
+  }
+}
 </script>
