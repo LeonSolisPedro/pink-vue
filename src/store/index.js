@@ -22,11 +22,10 @@ export default new Vuex.Store({
       state.userInfo.email = payload?.email
       state.userInfo.emailVerified = payload?.emailVerified
     },
-    setAuth(state, payload) {
-      state.isAuthenticated = payload
-    },
     setToken(state, payload) {
       state.token = payload
+      state.isAuthenticated = payload ? true : false
+      Vue.axios.defaults.headers.common = { "Authorization": `Bearer ${payload}` }
     }
   },
   actions: {
@@ -34,10 +33,14 @@ export default new Vuex.Store({
       try {
         await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
         await firebase.auth().signInWithEmailAndPassword(form.email, form.password)
-        const token = await firebase.auth().currentUser.getIdToken()
-        commit("setAuth", true)
+        let token = await firebase.auth().currentUser.getIdToken()
+
+        //This is a really bad practice, however, Firebase auth doesn't privide a role-managment system,
+        //So we have to build or own, here we're asking our backend is there's any role avaible for our logged user
+        await Vue.axios({ url: "/api/getRoles", method: "GET", headers: { "Authorization": `Bearer ${token}` } })
+        token = await firebase.auth().currentUser.getIdToken(true)
+
         commit("setToken", token)
-        Vue.axios.defaults.headers.common = { "Authorization": `Bearer ${token}` }
         alert(`Welcome ${state.userInfo.displayName ?? ""}`)
         return true
       } catch {
@@ -58,7 +61,6 @@ export default new Vuex.Store({
     async refreshToken({ commit, dispatch }) {
       try {
         const token = await firebase.auth().currentUser.getIdToken(true)
-        Vue.axios.defaults.headers.common = { "Authorization": `Bearer ${token}` }
         commit("setToken", token)
         return true
       } catch (error) {
@@ -69,7 +71,6 @@ export default new Vuex.Store({
     },
     logout({ commit }) {
       firebase.auth().signOut()
-      commit("setAuth", false)
       commit("setToken", null)
     }
   },
