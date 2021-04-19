@@ -4,7 +4,7 @@ import VueAxios from "vue-axios"
 import store from "../store"
 import router from "../router"
 
-axios.defaults.baseURL = "http://localhost:3000"
+axios.defaults.baseURL = "https://pink-5ac5a.ue.r.appspot.com/"
 
 if (store.state.isAuthenticated) {
   axios.defaults.headers.common = { "Authorization": `Bearer ${store.state.token}` }
