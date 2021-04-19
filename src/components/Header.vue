@@ -14,7 +14,7 @@
             <b-nav-item to="/aboutus/">About Us</b-nav-item>
             <b-nav-item to="/services/">Services</b-nav-item>
             <b-nav-item to="/contact/">Contact</b-nav-item>
-            <li class="nav-item" v-if="!token">
+            <li class="nav-item" v-if="!isAuthenticated">
               <router-link
                 class="botonlogueo btn btn-primary btn-sm pointer"
                 to="/login/"
@@ -22,7 +22,7 @@
                 Login</router-link
               >
             </li>
-            <li class="nav-item" v-if="token">
+            <li class="nav-item" v-if="isAuthenticated">
               <a
                 @click="superLogout()"
                 class="botonlogueo btn btn-primary btn-sm pointer"
@@ -65,7 +65,7 @@ import { mapState } from "vuex"
 import { mapActions } from "vuex"
 
 export default {
-  computed: mapState(["token"]),
+  computed: mapState(["isAuthenticated"]),
   methods: {
     superLogout() {
       this.$router.push("/login/")

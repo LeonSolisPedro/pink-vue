@@ -5,6 +5,16 @@
         <h1 class="text-center">Register</h1>
 
         <b-form class="mx-auto">
+
+          <b-form-group label="Choose a Name"
+            ><b-form-input
+              v-model="form.displayName"
+              placeholder="Diego"
+              type="text"
+              required
+            ></b-form-input
+          ></b-form-group>
+
           <b-form-group label="Enter your Email Address"
             ><b-form-input
               v-model="form.email"
@@ -40,7 +50,6 @@
             >You have an existing account?
             <router-link to="/login/">Login Here</router-link></small
           >
-
         </b-form>
       </b-col>
     </b-row>
@@ -62,10 +71,13 @@ form {
 
 
 <script>
+import { mapActions } from "vuex"
+
 export default {
   data() {
     return {
       form: {
+        displayName: "",
         email: "",
         password: "",
         passwordconfirm: ""
@@ -75,9 +87,15 @@ export default {
 
 
   methods: {
-    onClick() {
-      alert("I will be register you")
-    }
+    async onClick() {
+      const result = await this.registerUser(this.form)
+      if(result){
+        await this.login(this.form)
+        this.$router.push("/")
+      }
+    },
+
+    ...mapActions(["registerUser", "login"])
   }
 }
 </script>

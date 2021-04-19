@@ -33,19 +33,19 @@
       <b-row>
         <b-col cols="12" class="text-center">
           <h2 class="mb-3">Lorem Ipsum is simply dummy</h2>
-          <p v-if="token">
+          <p v-if="isAuthenticated">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sed
             placerat tortor. Etiam egestas iaculis leo quis ullamcorper. Sed non
             lectus mattis, molestie eros sed
           </p>
-          <p v-if="!token">
+          <p v-if="!isAuthenticated">
             Please, <router-link to="/login/">login first</router-link> to get started
           </p>
         </b-col>
       </b-row>
     </b-container>
 
-    <b-container v-if="token">
+    <b-container v-if="isAuthenticated">
       <b-row>
         <b-col md="3" class="d-flex justify-content-center mb-3">
           <div class="circleBase circle-blue">
@@ -74,7 +74,7 @@
       </b-row>
     </b-container>
 
-    <b-container v-if="token" class="explanation py-4">
+    <b-container v-if="isAuthenticated" class="explanation py-4">
       <b-row v-for="post in posts" :key="post.id" class="row py-4">
         <b-col md="3">
           <b-img
@@ -154,13 +154,13 @@ export default {
   },
 
   async mounted() {
-    if (this.token) {
+    if (this.isAuthenticated) {
       const result = await this.axios.get("/api/posts")
       this.posts = result.data
     }
   },
 
-  computed: mapState(["token"]),
+  computed: mapState(["isAuthenticated"]),
 
   components: {
     BCarousel,

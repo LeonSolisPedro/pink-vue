@@ -8,8 +8,22 @@ import "./plugins"
 
 Vue.config.productionTip = false
 
-new Vue({
+
+const app = new Vue({
   router,
   store,
   render: h => h(App)
-}).$mount("#app")
+})
+
+
+//Firebase Auth
+import firebase from "firebase/app"
+import "firebase/auth"
+let mounted = false
+firebase.auth().onAuthStateChanged(user => {
+  store.commit("setUserInfo", user)
+  if(mounted === false){
+    app.$mount('#app')
+    mounted = true
+  }
+})
